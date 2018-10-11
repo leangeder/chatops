@@ -1,0 +1,25 @@
+username: "ChatOps Master"
+
+chats:
+  slack:
+    token: "xoxb-2310897947-445446267233-W55pf49YWnjHMfQge5ryzpiS"
+
+kubernetes:
+  - name: "foundation"
+    node_pools:
+      - type: n1-standard-2
+        nb_zone: 3
+        nb_node_per_zone: 1
+        url: "https://dgdghdgfh"
+  - name: "services"
+    node_pools:
+      - type: n1-standard-2
+        nb_zone: 3
+        nb_node_per_zone: 1
+        url: "https://dgdghdgfh"
+  - name: "preview"
+    node_pools:
+      - type: n1-standard-2
+        nb_zone: 3
+        nb_node_per_zone: 1
+        url: "https://dgdghdgfh"
