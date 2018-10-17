@@ -1,8 +1,8 @@
-username: "ChatOps Master"
+pseudo: "ChatOps Master"
 
-chats:
-  slack:
-    token: "xoxb-2310897947-445446267233-W55pf49YWnjHMfQge5ryzpiS"
+slack:
+- token: "xoxb-451023708149-453324399522-VceD40ITKKuSfN1mWQk4vip1"
+  url: "sdfsdf"
 
 kubernetes:
   - name: "foundation"

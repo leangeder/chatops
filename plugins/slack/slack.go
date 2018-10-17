@@ -164,7 +164,6 @@ func New(config *configuration.Configuration) (*PluginConfiguration, error) {
 		return nil, errors.New("Invalid configuration")
 	}
 
-	*connect()
 	return &PluginConfiguration{configuration: config}, nil
 	// return &PluginConfiguration{pseudo: config.Pseudo, token: config.Slack.token, url: config.Slack.url}, nil
 

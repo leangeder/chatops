@@ -1,67 +1,80 @@
 package main
 
 import (
-	"fmt"
-	// "log"
+
 	// "net"
+
 	"os"
+
 	// "path/filepath"
 	// "strings"
-	"sync"
 
-	"github.com/leangeder/chatops/lib/bot"
-
-	yaml "gopkg.in/yaml.v2"
-
+	"github.com/leangeder/chatops/lib/configuration"
+	"github.com/leangeder/chatops/plugins"
 
 	// for test
 	"flag"
 	//"plugin"
-	"io/ioutil"
 )
-
-type Plugin interface {
-
-}
 
 func main() {
 	configFile := flag.String("config", "chatops.yml", "Path of the configuration file")
 	flag.Parse()
 
-	c := loadConfig(*configFile)
-
-	fmt.Println("Error ", c["username"])
-
-	var wg sync.WaitGroup
-	for {
-		wg.Add(1)
-		go func() {
-			bot.New(c).Process()
-		}()
+	if *configFile == "" {
+		return
 	}
-	wg.Wait()
-}
 
-
-func loadConfig(path string) map[string]interface{} {
-
-	f, err := os.Open(path)
-	defer f.Close()
+	config, err := configuration.NewConfiguration(*configFile)
 	if err != nil {
 		panic(err)
+		os.Exit(1)
 	}
 
-	var c map[string]interface{}
+	plugins.New(config)
 
-	buff, err := ioutil.ReadFile(path)
-	if err != nil {
-		panic(err)
-	}
+	<-make(chan struct{})
+	return
 
-	yaml.Unmarshal(buff, &c)
+	// c := loadConfig(*configFile)
 
-	return c
+	// // go func() {
+	// // 	plugins.New(c)
+	// // }()
+
+	// fmt.Println("Error ", c["username"])
+	// fmt.Println("Error ", c["slack"])
+	//	plugins.New(config)
+
+	// var wg sync.WaitGroup
+	// for {
+	// 	wg.Add(1)
+	// 	go func() {
+	// 		bot.New(c).Process()
+	// 	}()
+	// }
+	// wg.Wait()
 }
+
+// func loadConfig(path string) map[string]interface{} {
+//
+// 	f, err := os.Open(path)
+// 	defer f.Close()
+// 	if err != nil {
+// 		panic(err)
+// 	}
+//
+// 	var c map[string]interface{}
+//
+// 	buff, err := ioutil.ReadFile(path)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+//
+// 	yaml.Unmarshal(buff, &c)
+//
+// 	return c
+// }
 
 // func loadPlugins() {
 //
